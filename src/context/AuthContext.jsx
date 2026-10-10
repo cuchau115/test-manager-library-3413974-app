@@ -1,6 +1,6 @@
-import { createContext, useContext, useMemo, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { TOKEN_KEY, UNAUTHORIZED_EVENT } from '../api/client.js';
 
-const TOKEN_KEY = 'mllib.token';
 const ROLE_KEY = 'mllib.role';
 
 const AuthContext = createContext(null);
@@ -8,6 +8,17 @@ const AuthContext = createContext(null);
 export function AuthProvider({ children }) {
   const [token, setToken] = useState(() => localStorage.getItem(TOKEN_KEY));
   const [role, setRole] = useState(() => localStorage.getItem(ROLE_KEY));
+
+  useEffect(() => {
+    const onUnauthorized = () => {
+      localStorage.removeItem(TOKEN_KEY);
+      localStorage.removeItem(ROLE_KEY);
+      setToken(null);
+      setRole(null);
+    };
+    window.addEventListener(UNAUTHORIZED_EVENT, onUnauthorized);
+    return () => window.removeEventListener(UNAUTHORIZED_EVENT, onUnauthorized);
+  }, []);
 
   const value = useMemo(
     () => ({
