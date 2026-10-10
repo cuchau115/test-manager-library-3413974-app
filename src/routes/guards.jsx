@@ -15,3 +15,17 @@ export function RequireAuth({ children }) {
 
   return children;
 }
+
+/**
+ * Envuelve rutas o bloques que exigen un rol concreto (p. ej. solo admin).
+ * Un rol insuficiente vuelve al panel sin revelar la ruta pedida.
+ */
+export function RequireRole({ roles, children }) {
+  const { role } = useAuth();
+
+  if (!roles.includes(role)) {
+    return <Navigate to="/" replace />;
+  }
+
+  return children;
+}
