@@ -5,6 +5,7 @@ const NAV_ITEMS = [
   { to: '/', label: 'Panel', end: true },
   { to: '/libros', label: 'Catálogo' },
   { to: '/socios', label: 'Socios' },
+  { to: '/prestamos/nuevo', label: 'Prestar' },
   { to: '/reportes', label: 'Reporte', adminOnly: true },
 ];
 

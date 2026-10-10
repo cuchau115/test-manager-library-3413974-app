@@ -393,3 +393,80 @@ button:disabled {
 .login-card h2 {
   margin-top: 0;
 }
+
+/* --- Prestar: selección de socio y libros --- */
+.pick-list {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  max-height: 260px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.pick-list li {
+  margin: 0;
+}
+
+.pick-list button {
+  width: 100%;
+  text-align: left;
+  background-color: #f8fafc;
+  color: #1f2933;
+  border: 1px solid #e4e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.pick-list button:hover:not(:disabled) {
+  background-color: #eef2f7;
+}
+
+.selection {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  font-size: 0.7rem;
+  background-color: #1f2933;
+  color: #ffffff;
+  border-radius: 999px;
+  padding: 0.1rem 0.5rem;
+}
+
+.chips {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background-color: #e0e7ff;
+  color: #1e1b4b;
+  border-radius: 999px;
+  padding: 0.2rem 0.5rem 0.2rem 0.7rem;
+  font-size: 0.85rem;
+}
+
+.chip button {
+  background: transparent;
+  border: none;
+  color: #1e1b4b;
+  padding: 0 0.25rem;
+  font-size: 1rem;
+  line-height: 1;
+}
+
