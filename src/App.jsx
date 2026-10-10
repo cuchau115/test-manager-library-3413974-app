@@ -7,6 +7,7 @@ import LoanNew from './pages/LoanNew.jsx';
 import Loans from './pages/Loans.jsx';
 import Login from './pages/Login.jsx';
 import Members from './pages/Members.jsx';
+import Overdue from './pages/Overdue.jsx';
 import Reports from './pages/Reports.jsx';
 import { RequireAuth, RequireRole } from './routes/guards.jsx';
 
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="prestamos/nuevo" element={<LoanNew />} />
         <Route path="prestamos" element={<Loans />} />
         <Route path="prestamos/:id" element={<LoanDetail />} />
+        <Route path="vencidos" element={<Overdue />} />
         <Route
           path="reportes"
           element={

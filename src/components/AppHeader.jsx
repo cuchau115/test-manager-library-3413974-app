@@ -7,6 +7,7 @@ const NAV_ITEMS = [
   { to: '/socios', label: 'Socios' },
   { to: '/prestamos', label: 'Préstamos', end: true },
   { to: '/prestamos/nuevo', label: 'Prestar' },
+  { to: '/vencidos', label: 'Vencidos' },
   { to: '/reportes', label: 'Reporte', adminOnly: true },
 ];
 
