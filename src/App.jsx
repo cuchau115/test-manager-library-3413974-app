@@ -3,6 +3,7 @@ import AppLayout from './layout/AppLayout.jsx';
 import Books from './pages/Books.jsx';
 import Home from './pages/Home.jsx';
 import Login from './pages/Login.jsx';
+import Members from './pages/Members.jsx';
 import Reports from './pages/Reports.jsx';
 import { RequireAuth, RequireRole } from './routes/guards.jsx';
 
@@ -20,6 +21,7 @@ export default function App() {
       >
         <Route index element={<Home />} />
         <Route path="libros" element={<Books />} />
+        <Route path="socios" element={<Members />} />
         <Route
           path="reportes"
           element={

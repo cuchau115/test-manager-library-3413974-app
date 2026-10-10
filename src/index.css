@@ -184,6 +184,41 @@ body {
   font-size: 0.85rem;
 }
 
+/* --- Socios: dos columnas y detalle --- */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+}
+
+.two-col h3 {
+  margin-top: 0;
+}
+
+.ok {
+  color: #166534;
+  background-color: #dcfce7;
+  border: 1px solid #bbf7d0;
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  margin: 0.5rem 0;
+}
+
+.detail-row td {
+  background-color: #f8fafc;
+}
+
+.detail-row p {
+  margin: 0.25rem 0;
+}
+
 /* --- Comunes --- */
 .card {
   background-color: #ffffff;
