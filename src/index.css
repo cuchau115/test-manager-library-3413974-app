@@ -88,6 +88,102 @@ body {
   padding: 0.2rem 0.7rem;
 }
 
+/* --- Barra de herramientas (búsqueda/filtro) --- */
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.75rem 0 1rem;
+}
+
+.toolbar-search {
+  flex: 1;
+  min-width: 220px;
+}
+
+/* --- Tabla de datos --- */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border: 1px solid #e4e7eb;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.data-table th,
+.data-table td {
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  border-bottom: 1px solid #e4e7eb;
+  vertical-align: middle;
+}
+
+.data-table th {
+  background-color: #f1f5f9;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: #475569;
+}
+
+.data-table tr:last-child td {
+  border-bottom: none;
+}
+
+.data-table .num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.85rem;
+}
+
+/* --- Hueco de portada (la real llega en APP-06) --- */
+.cover-placeholder {
+  width: 44px;
+  height: 60px;
+  border: 1px dashed #cbd2d9;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  color: #64748b;
+  text-align: center;
+  padding: 0.15rem;
+}
+
+/* --- Paginación --- */
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 1rem;
+}
+
+.pagination button {
+  border: 1px solid #cbd2d9;
+  background-color: #ffffff;
+  color: #1f2933;
+  min-width: 2.2rem;
+}
+
+.pagination button.page-current {
+  background-color: #1f2933;
+  color: #ffffff;
+  border-color: #1f2933;
+}
+
+.pagination-info {
+  margin-left: auto;
+  color: #64748b;
+  font-size: 0.85rem;
+}
+
 /* --- Comunes --- */
 .card {
   background-color: #ffffff;
