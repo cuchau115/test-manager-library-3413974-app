@@ -280,6 +280,102 @@ button:disabled {
   cursor: not-allowed;
 }
 
+/* --- Encabezado de página con acción --- */
+.page-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.page-head h2 {
+  margin: 0.5rem 0;
+}
+
+/* --- Botones secundarios y de peligro --- */
+.btn-secondary {
+  background-color: #ffffff;
+  color: #1f2933;
+  border: 1px solid #cbd2d9;
+}
+
+.btn-danger {
+  background-color: #b91c1c;
+  border-color: #b91c1c;
+  color: #ffffff;
+}
+
+.row-actions {
+  display: flex;
+  gap: 0.4rem;
+  justify-content: flex-end;
+}
+
+.row-actions button {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.85rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+/* --- Portadas --- */
+.cover {
+  display: block;
+  border-radius: 4px;
+  object-fit: cover;
+  background-color: #f1f5f9;
+}
+
+.cover-sm {
+  width: 44px;
+  height: 60px;
+}
+
+.cover-md {
+  width: 88px;
+  height: 120px;
+}
+
+.cover-empty {
+  border: 1px dashed #cbd2d9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  color: #64748b;
+  text-align: center;
+  padding: 0.15rem;
+}
+
+/* --- Formulario de libro --- */
+.book-form {
+  margin-bottom: 1.25rem;
+}
+
+.book-form h3 {
+  margin-top: 0;
+}
+
+.cover-editor {
+  border-top: 1px solid #e4e7eb;
+  padding-top: 0.75rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.cover-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
 /* --- Login --- */
 .login {
   display: flex;

@@ -120,6 +120,9 @@ export const api = {
   upload: (path, formData, options) =>
     request('POST', path, { ...options, body: formData }),
 
+  uploadPut: (path, formData, options) =>
+    request('PUT', path, { ...options, body: formData }),
+
   async getBinary(path, options) {
     const response = await fetch(`${API_URL}${path}${buildQuery(options?.params)}`, {
       method: 'GET',

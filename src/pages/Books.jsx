@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { ApiError, api } from '../api/client.js';
+import BookCover from '../components/BookCover.jsx';
+import BookForm from '../components/BookForm.jsx';
 import Pagination from '../components/Pagination.jsx';
+import { useAuth } from '../context/AuthContext.jsx';
 
 const PAGE_SIZE = 10;
 
@@ -10,6 +13,7 @@ function toList(data) {
 }
 
 export default function Books() {
+  const { isAdmin } = useAuth();
   const [books, setBooks] = useState([]);
   const [categories, setCategories] = useState([]);
   const [total, setTotal] = useState(0);
@@ -19,6 +23,10 @@ export default function Books() {
   const [categoryId, setCategoryId] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [refreshKey, setRefreshKey] = useState(0);
+  const [showForm, setShowForm] = useState(false);
+  const [editing, setEditing] = useState(null);
+  const [busyId, setBusyId] = useState(null);
 
   useEffect(() => {
     let active = true;
@@ -56,7 +64,11 @@ export default function Books() {
     return () => {
       active = false;
     };
-  }, [search, categoryId, page]);
+  }, [search, categoryId, page, refreshKey]);
+
+  function refresh() {
+    setRefreshKey((current) => current + 1);
+  }
 
   function handleSearch(event) {
     event.preventDefault();
@@ -69,11 +81,57 @@ export default function Books() {
     setCategoryId(event.target.value);
   }
 
+  function openCreate() {
+    setEditing(null);
+    setShowForm(true);
+  }
+
+  function openEdit(book) {
+    setEditing(book);
+    setShowForm(true);
+  }
+
+  function closeForm() {
+    setShowForm(false);
+    setEditing(null);
+  }
+
+  function handleSaved() {
+    refresh();
+    if (!editing) {
+      closeForm();
+    }
+  }
+
+  async function handleDelete(book) {
+    const confirmed = window.confirm(
+      `¿Dar de baja «${book.title}»? Dejará de aparecer en el catálogo.`
+    );
+    if (!confirmed) return;
+    setBusyId(book.id);
+    setError(null);
+    try {
+      await api.delete(`/books/${book.id}`);
+      refresh();
+    } catch (err) {
+      setError(err instanceof ApiError ? err.message : 'No se pudo dar de baja el libro');
+    } finally {
+      setBusyId(null);
+    }
+  }
+
   const available = (book) => book.available_copies ?? 0;
 
   return (
     <section>
-      <h2>Catálogo</h2>
+      <div className="page-head">
+        <h2>Catálogo</h2>
+        {isAdmin && (
+          <button type="button" onClick={openCreate}>
+            Nuevo libro
+          </button>
+        )}
+      </div>
 
       <form className="toolbar" onSubmit={handleSearch}>
         <input
@@ -94,6 +152,15 @@ export default function Books() {
         </select>
         <button type="submit">Buscar</button>
       </form>
+
+      {isAdmin && showForm && (
+        <BookForm
+          book={editing}
+          categories={categories}
+          onSaved={handleSaved}
+          onCancel={closeForm}
+        />
+      )}
 
       {error && (
         <p className="error" role="alert">
@@ -117,14 +184,14 @@ export default function Books() {
                   <th>ISBN</th>
                   <th>Categoría</th>
                   <th className="num">Disponibles</th>
+                  {isAdmin && <th aria-label="Acciones" />}
                 </tr>
               </thead>
               <tbody>
                 {books.map((book) => (
                   <tr key={book.id}>
                     <td>
-                      {/* La portada real se añade en APP-06; aquí se deja el hueco. */}
-                      <div className="cover-placeholder">{book.cover_key ? 'Portada' : 'Sin portada'}</div>
+                      <BookCover bookId={book.id} coverKey={book.cover_key} />
                     </td>
                     <td>{book.title}</td>
                     <td>{book.author}</td>
@@ -133,6 +200,21 @@ export default function Books() {
                     <td className="num">
                       {available(book)} / {book.total_copies}
                     </td>
+                    {isAdmin && (
+                      <td className="row-actions">
+                        <button type="button" onClick={() => openEdit(book)}>
+                          Editar
+                        </button>
+                        <button
+                          type="button"
+                          className="btn-danger"
+                          onClick={() => handleDelete(book)}
+                          disabled={busyId === book.id}
+                        >
+                          {busyId === book.id ? '…' : 'Baja'}
+                        </button>
+                      </td>
+                    )}
                   </tr>
                 ))}
               </tbody>
